@@ -1,4 +1,5 @@
-
+#ifndef PLAYERSHIP_H
+#define PLAYERSHIP_H
 #pragma once
 
 #include "Ship.h"
@@ -9,77 +10,92 @@ class PlayerShip : public Ship
 
 public:
 
-	/** @brief Creates a new instance of PlayerShip. */
-	PlayerShip() { }
-	virtual ~PlayerShip() { }
+    /** @brief Creates a new instance of PlayerShip. */
+    PlayerShip() { }
+    virtual ~PlayerShip() { }
 
-	/** @brief Loads the content for the player ship.
-		@param resourceManager A reference to the game's resource manager,
-		used for loading and managing game assets (resources). */
-	virtual void LoadContent(ResourceManager& resourceManager);
+    void Hit(float damage);
+    int GetLives() { return m_lives; }
+    void SetLives(int lives) { m_lives = lives; }
+    void Initialize(Level* pLevel, const Vector2& startPosition, ResourceManager& resourceManager);
 
-	/** @brief Updates the player ship.
-		@param gameTime A reference to the game time object. */
-	virtual void Update(const GameTime& gameTime);
+    void OnCollisionWithEnemy();
 
-	/** @brief Draws the player ship.
-		@param spriteBatch A reference to the game's sprite batch, used for rendering. */
-	virtual void Draw(SpriteBatch& spriteBatch);
+    /** @brief Loads the content for the player ship.
+        @param resourceManager A reference to the game's resource manager,
+        used for loading and managing game assets (resources). */
+    virtual void LoadContent(ResourceManager& resourceManager);
 
-	/** @brief Handles input for the player ship.
-		@param input The current state of all player input devices. */
-	virtual void HandleInput(const InputState& input);
+    /** @brief Updates the player ship.
+        @param gameTime A reference to the game time object. */
+    virtual void Update(const GameTime& gameTime);
 
-	/** @brief Initializes the player ship.
-		@param pLevel A pointer to the current level.
-		@param startPosition The starting position of the player ship. */
-	virtual void Initialize(Level* pLevel, Vector2& startPosition);
+    /** @brief Draws the player ship.
+        @param spriteBatch A reference to the game's sprite batch, used for rendering. */
+    virtual void Draw(SpriteBatch& spriteBatch);
 
-	/** @brief Gets the half dimensions of the player ship.
-		@return Returns the half dimensions of the player ship. */
-	virtual Vector2 GetHalfDimensions() const;
+    /** @brief Handles input for the player ship.
+        @param input The current state of all player input devices. */
+    virtual void HandleInput(const InputState& input);
 
-	/** @brief Sets the desired direction of the player ship, based on input.
-		@param direction The desired direction. */
-	virtual void SetDesiredDirection(const Vector2 direction) { m_desiredDirection.Set(direction); }
+    /** @brief Initializes the player ship.
+        @param pLevel A pointer to the current level.
+        @param startPosition The starting position of the player ship. */
+    virtual void Initialize(Level* pLevel, const Vector2& startPosition);
 
-	/** @brief Gets the string representation of the player ship.
-		@return Returns the string "Player Ship". */
-	virtual std::string ToString() const { return "Player Ship"; }
+    /** @brief Gets the half dimensions of the player ship.
+        @return Returns the half dimensions of the player ship. */
+    virtual Vector2 GetHalfDimensions() const;
 
-	/** @brief Gets the collision type of the player ship.
-		@return Returns the collision type of the player ship. */
-	virtual CollisionType GetCollisionType() const { return (CollisionType::Player | CollisionType::Ship); }
+    /** @brief Sets the desired direction of the player ship, based on input.
+        @param direction The desired direction. */
+    virtual void SetDesiredDirection(const Vector2 direction) { m_desiredDirection.Set(direction); }
 
-	/** @brief Prevents the player ship from moving off the screen.
-		@param isConfined True to confine the player ship to the screen, false otherwise. */
-	virtual void ConfineToScreen(const bool isConfined = true) { m_isConfinedToScreen = isConfined; }
+    /** @brief Gets the string representation of the player ship.
+        @return Returns the string "Player Ship". */
+    virtual std::string ToString() const { return "Player Ship"; }
+
+    /** @brief Gets the collision type of the player ship.
+        @return Returns the collision type of the player ship. */
+    virtual CollisionType GetCollisionType() const { return (CollisionType::Player | CollisionType::Ship); }
+
+    /** @brief Prevents the player ship from moving off the screen.
+        @param isConfined True to confine the player ship to the screen, false otherwise. */
+    virtual void ConfineToScreen(const bool isConfined = true) { m_isConfinedToScreen = isConfined; }
 
 
 protected:
 
-	/** @brief Sets the responsiveness of the player ship.
-		@param responsiveness The responsiveness of the player ship. */
-	virtual void SetResponsiveness(const float responsiveness);
+    /** @brief Sets the responsiveness of the player ship.
+        @param responsiveness The responsiveness of the player ship. */
+    virtual void SetResponsiveness(const float responsiveness);
 
-	/** @brief Gets the responsiveness of the player ship.
-		@return Returns the responsiveness of the player ship. */
-	virtual float GetResponsiveness() const { return m_responsiveness; }
+    /** @brief Gets the responsiveness of the player ship.
+        @return Returns the responsiveness of the player ship. */
+    virtual float GetResponsiveness() const { return m_responsiveness; }
 
-	/** @brief Gets the desired direction of the player ship.
-		@return Returns the desired direction of the player ship. */
-	virtual Vector2 GetDesiredDirection() const { return m_desiredDirection; }
+    /** @brief Gets the desired direction of the player ship.
+        @return Returns the desired direction of the player ship. */
+    virtual Vector2 GetDesiredDirection() const { return m_desiredDirection; }
 
+    void AddLife();
+
+    void RemoveLife();
 
 private:
 
-	Vector2 m_desiredDirection;
-	Vector2 m_velocity;
+    int m_lives;
 
-	float m_responsiveness = 0;
+    std::vector<Texture*> m_lifeTextures;
 
-	bool m_isConfinedToScreen = false;
+    Vector2 m_desiredDirection;
+    Vector2 m_velocity;
 
-	Texture* m_pTexture = nullptr;
+    float m_responsiveness = 0;
+
+    bool m_isConfinedToScreen = false;
+
+    Texture* m_pTexture = nullptr;
 
 };
+#endif

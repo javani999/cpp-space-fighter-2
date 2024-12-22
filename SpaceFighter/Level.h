@@ -20,6 +20,8 @@ public:
 	Level();
 	virtual ~Level();
 
+	ResourceManager* GetResourceManager() { return &m_resourceManager; }
+
 	/** @brief Load the content for the level, including game objects and resources.
 		@param resourceManager A reference to the game's resource manager,
 		used for loading and managing game assets (resources). */
@@ -129,6 +131,8 @@ protected:
 	virtual AudioSample* GetBackgroundAudio() { return m_pAudio; }
 
 private:
+
+	ResourceManager m_resourceManager;
 
 	static std::vector<Explosion *> s_explosions;
 	//std::vector<Explosion *>::iterator m_explosionIt;

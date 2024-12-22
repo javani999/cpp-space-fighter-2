@@ -50,9 +50,6 @@
     <ClCompile Include="GameplayScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
@@ -100,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files\Game Objects\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

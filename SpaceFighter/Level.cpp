@@ -24,8 +24,13 @@ void PlayerCollidesWithEnemy(GameObject *pObject1, GameObject *pObject2)
 	bool m = pObject1->HasMask(CollisionType::Player);
 	PlayerShip *pPlayerShip = (PlayerShip *)((m) ? pObject1 : pObject2);
 	EnemyShip *pEnemyShip = (EnemyShip *)((!m) ? pObject1 : pObject2);
+
 	pPlayerShip->Hit(std::numeric_limits<float>::max());
 	pEnemyShip->Hit(std::numeric_limits<float>::max());
+	if (pPlayerShip->GetLives() == 0)
+	{
+		std::cout << "Game Over!!!!!!!!!" << "\n";
+	}
 }
 
 
@@ -139,7 +144,10 @@ void Level::Update(const GameTime& gameTime)
 	
 	for (Explosion *pExplosion : s_explosions) pExplosion->Update(gameTime);
 
-	if (!m_pPlayerShip->IsActive()) GetGameplayScreen()->Exit();
+    if (!m_pPlayerShip->IsActive() && m_pPlayerShip->GetLives() <= 0)
+    {
+        GetGameplayScreen()->Exit();
+    }
 }
 
 

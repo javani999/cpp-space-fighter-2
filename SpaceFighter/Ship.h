@@ -90,6 +90,8 @@ protected:
 		@return Returns the current hit points of the ship. */
 	virtual float GetHitPoints() const { return m_hitPoints; }
 
+	void SetHitPoints(const float hitPoints) { m_hitPoints = hitPoints; }
+
 	/** @brief Gets the max hit points of the ship.
 		@return Returns the max hit points of the ship. */
 	virtual float GetMaxHitPoints() const { return m_maxHitPoints; }
@@ -99,10 +101,10 @@ private:
 
 	float m_speed = 300; // pixels per second
 
-	float m_maxHitPoints = 3;
+	float m_maxHitPoints;
 	float m_hitPoints = m_maxHitPoints;
 
-	bool m_isInvulnurable = false;
+	bool m_isInvulnurable;
 
 	std::map<std::string, IAttachment *> m_attachments;
 	std::map<std::string, IAttachment*>::iterator m_attachmentIt;

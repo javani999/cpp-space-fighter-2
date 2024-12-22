@@ -12,6 +12,8 @@ void CollisionManager::AddCollisionType(const CollisionType type1, const Collisi
 	m_collisions.push_back(c);
 }
 
+
+
 void CollisionManager::CheckCollision(GameObject *pGameObject1, GameObject *pGameObject2)
 {
 	CollisionType t1 = pGameObject1->GetCollisionType();

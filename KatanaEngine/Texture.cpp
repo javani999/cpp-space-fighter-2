@@ -31,8 +31,11 @@ namespace KatanaEngine
 
 	Texture::~Texture()
 	{
-		al_destroy_bitmap(m_pBitmap);
-		m_pBitmap = nullptr;
+		if (m_pBitmap != nullptr)
+		{
+			al_destroy_bitmap(m_pBitmap);
+			m_pBitmap = nullptr;
+		}
 	}
 
 
